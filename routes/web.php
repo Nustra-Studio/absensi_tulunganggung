@@ -25,6 +25,7 @@ Route::get('/', function () {
         Route::get('/lembur','absen@lembur')->name('absen.lembur');
         Route::get('/add/{id}','absen@add')->name('absen.add');
         Route::post('/add-store','absen@store');
+        Route::post('/penyusuaianlembur','absen@lembur');
         Route::post('/add-excel/{id}','absen@excel')->name('absen.excel');
         Route::get('/penyesuaian','absen@penyesuaian')->name('absen.penyesuaian');
     });

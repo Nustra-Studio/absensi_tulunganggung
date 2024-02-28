@@ -14,18 +14,13 @@
 @section('content')
 <nav class="page-breadcrumb">
   <ol class="breadcrumb">
-    <li class="breadcrumb-item"><a href="#">Absen</a></li>
+    <li class="breadcrumb-item"><a href="#">Penyusuaian Lembur</a></li>
   </ol>
 </nav>
 
 <div class="row">
   <div class="col-md-12 grid-margin stretch-card">
     <div class="card">
-        <div class="card-header">
-            <h4 class="card-title">Data Absen</h4>
-            <a href="{{ url("/absen/add/$data->id") }}" class="btn btn-primary btn-sm">Tambah Data</a>
-            <button id="showUploadModal"  class="btn btn-success btn-sm">Tambah Excel</button>
-        </div>
       <div class="card-body">
         {{-- <p class="text-muted mb-3">Read the <a href="https://datatables.net/" target="_blank"> Official DataTables Documentation </a>for a full list of instructions and other options.</p> --}}
         
@@ -60,15 +55,15 @@
                 <td>
                   <div class="text-end">
                     {{-- <a href="/database/cabang/{{$item->id}}/edit" class="btn btn-primary btn-sm">Edit</a> --}}
-                    <form id="form-delete-{{ $item->id }}" action="{{ route('absen.destroy', $item->id) }}" method="POST" style="display: none;">
+                    <form id="form-delete-{{ $item->id }}" action="{{ route('absen.penyusuaianlembur', $item->id) }}" method="POST" style="display: none;">
                       @csrf
-                      @method('DELETE')
+                      @method('post')
                   </form>
-                  <button type="submit" class="btn btn-danger btn-sm delete-button" data-form-delete="{{ $item->id }}">Delete</button>
+                  <button type="submit" class="btn btn-danger btn-sm delete-button" data-form-delete="{{ $item->id }}">Bukan Lembur</button>
                   </div>
               </tr>
           @endforeach
-              <!-- Modal -->
+              {{-- <!-- Modal -->
 <div class="modal fade" id="uploadModal" tabindex="-1" role="dialog" aria-labelledby="uploadModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
       <div class="modal-content">
@@ -87,7 +82,7 @@
           </form>
       </div>
   </div>
-</div>
+</div> --}}
 
             </tbody>
           </table>
