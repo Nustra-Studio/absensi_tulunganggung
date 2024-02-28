@@ -36,6 +36,7 @@ class SolutionsImport implements ToCollection
                     $absen_times = $carbonDate->format('H:i'); // Perbaikan: Menggunakan "i" untuk menampilkan menit
                     $absen_time = Carbon::parse($absen_times);
                     $absen_over = $carbonDate->copy()->addHour();
+                    $absen_over_minute = $carbonDate->copy()->addMinutes(5);
                     $absen_tanggal = $carbonDate->format('Y-m-d');
                     $khusus =  KaryawanModel::where('id_absen',$item[0])->value('jabatan');
                     $check_id = AbsenModel::where('tanggal', $absen_tanggal)->where('id_pegawai', $item[0])->value('id');

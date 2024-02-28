@@ -1,5 +1,16 @@
     @extends('layout.master')
-
+@php
+    use App\KaryawanModel;
+    use App\CabangModel;
+    use App\ShiftModel;
+    use App\GajiModel;
+    use App\PotonganModel;
+    $data = KaryawanModel::find($id);
+    $gaji = GajiModel::where('id_pegawai',$id)->where('status','gaji_pokok')->first();
+    $bensin = GajiModel::where('id_pegawai',$id)->where('status','uang_bensin')->first();
+    $makan = GajiModel::where('id_pegawai',$id)->where('status','uang_makan')->first();
+    $potongan = PotonganModel::where('id_pegawai', $id)->where('status', 'terlambat')->first();
+@endphp
     @section('content')
     <nav class="page-breadcrumb">
         <ol class="breadcrumb">
@@ -37,15 +48,27 @@
     </div>
     <div class="mb-3">
         <label for="exampleInputUsername4" class="form-label">Gaji</label>
-        <input type="number" name="gaji" value="{{$gaji}}" class="form-control" id="exampleInputUsername4" autocomplete="off" placeholder="">
+        <input type="number" name="gaji" value="{{$gaji->jumlah}}" class="form-control" id="exampleInputUsername4" autocomplete="off" placeholder="">
+    </div>
+    <div class="mb-3">
+        <label for="exampleInputUsername4" class="form-label">Uang Makan</label>
+        <input type="number" name="uang_makan" value="{{$makan->jumlah}}" class="form-control" id="exampleInputUsername4" autocomplete="off" placeholder="">
+    </div>
+    <div class="mb-3">
+        <label for="exampleInputUsername4" class="form-label">Uang bensin</label>
+        <input type="number" name="uang_bensin" value="{{$bensin->jumlah}}" class="form-control" id="exampleInputUsername4" autocomplete="off" placeholder="">
+    </div>
+    <div class="mb-3">
+        <label for="exampleInputUsername4" class="form-label">Potongan Terlambat</label>
+        <input type="number" name="terlambat" value="{{$potongan->jumlah}}" class="form-control" id="exampleInputUsername4" autocomplete="off" placeholder="">
     </div>
     <div class="mb-3">
         <label for="exampleFormControlSelect1" class="form-label">Tugas Di Cabang</label>
         <select class="form-select" name="cabang" id="exampleFormControlSelect1">
             @php
-                $data = CabangModel::all();
+                $datas = CabangModel::all();
             @endphp
-                @foreach ($data as $item)
+                @foreach ($datas as $item)
                     <option @if ($item->id === $data->id_cabang)
                         selected
                     @endif value="{{$item->id}}">{{$item->nama}}</option>
@@ -56,9 +79,9 @@
         <label for="exampleFormControlSelect1" class="form-label">Tugas Di Cabang</label>
         <select class="form-select" name="shift" id="exampleFormControlSelect1">
             @php
-                $data = ShiftModel::all();
+                $datas = ShiftModel::all();
             @endphp
-                @foreach ($data as $item)
+                @foreach ($datas as $item)
                     <option @if ($item->id === $data->id_shift)
                         selected
                     @endif value="{{$item->id}}">{{$item->name}}</option>

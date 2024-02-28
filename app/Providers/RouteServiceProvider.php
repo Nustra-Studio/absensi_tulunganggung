@@ -14,7 +14,7 @@ class RouteServiceProvider extends ServiceProvider
      *
      * @var string
      */
-    // public const HOME = '/home';
+    public const HOME = '/database/cabang';
 
     /**
      * This namespace is applied to your controller routes.

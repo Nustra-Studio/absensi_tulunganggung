@@ -70,7 +70,7 @@
         // Tambahkan event listener untuk tombol atau tautan
         document.addEventListener('DOMContentLoaded', function () {
             var deleteButtons = document.getElementsByClassName('delete-button');
-      
+            var approve = document.getElementsByClassName('approve-button');
             Array.from(deleteButtons).forEach(function (button) {
                 button.addEventListener('click', function (event) {
                     event.preventDefault();
@@ -89,6 +89,28 @@
                         if (result.isConfirmed) {
                             // Mengirimkan request penghapusan
                             document.getElementById('form-delete-' + formId).submit();
+                        }
+                    });
+                });
+            });
+            Array.from(approve).forEach(function (button) {
+                button.addEventListener('click', function (event) {
+                    event.preventDefault();
+                    var formId = this.getAttribute('data-form-approve');
+      
+                    Swal.fire({
+                        title: 'Anda yakin?',
+                        text: "Tindakan ini tidak dapat diurungkan!",
+                        icon: 'warning',
+                        showCancelButton: true,
+                        confirmButtonColor: '#690',
+                        cancelButtonColor: '#3085d6',
+                        confirmButtonText: 'Ya, approve!',
+                        cancelButtonText: 'Batal'
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            // Mengirimkan request penghapusan
+                            document.getElementById('form-approve-' + formId).submit();
                         }
                     });
                 });

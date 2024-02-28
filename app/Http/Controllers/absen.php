@@ -22,7 +22,7 @@ class absen extends Controller
         //
     }
     public function lembur(){
-
+        return view('pages.cabang.lembur');
     }
     public function penyesuaian(){
         

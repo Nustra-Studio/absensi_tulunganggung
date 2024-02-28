@@ -22,6 +22,7 @@
           <span class="link-title">Dashboard</span>
         </a>
       </li> --}}
+      @if (auth()->user()->role == "admin")
       <li class="nav-item nav-category">Data Master</li>
       <li class="nav-item {{ active_class(['masterdata/*']) }}">
         <a class="nav-link" data-bs-toggle="collapse" href="#masterdata" role="button" aria-expanded="{{ is_active_route(['email/*']) }}" aria-controls="email">
@@ -49,6 +50,7 @@
           <span class="link-title">Setting</span>
         </a>
       </li>
+      @endif
       <li class="nav-item nav-category">web apps</li>
       <li class="nav-item {{ active_class(['cabang/*']) }}">
         <a class="nav-link" data-bs-toggle="collapse" href="#cabang" role="button" aria-expanded="{{ is_active_route(['email/*']) }}" aria-controls="email">
@@ -82,6 +84,7 @@
           </ul>
         </div>
       </li> -->
+      @if (auth()->user()->role == "admin")
       <li class="nav-item {{ active_class(['/absen/lembur']) }}">
         <a href="{{ url('/absen/lembur') }}" class="nav-link">
           <i class="link-icon" data-feather="moon"></i>
@@ -116,6 +119,7 @@
           <span class="link-title">Gaji</span>
         </a>
       </li>
+      @endif
       <!-- <li class="nav-item {{ active_class(['Gaji/*']) }}">
         <a class="nav-link" data-bs-toggle="collapse" href="#Gaji" role="button" aria-expanded="{{ is_active_route(['email/*']) }}" aria-controls="email">
           <i class="link-icon" data-feather="dollar-sign"></i>

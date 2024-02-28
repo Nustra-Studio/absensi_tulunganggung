@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\GajiModel;
+use App\AbsenModel;
 
 class LemburController extends Controller
 {
@@ -34,7 +36,16 @@ class LemburController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = [
+            'id_pegawai'=>$request->id_pegawai,
+            'jumlah'=>$request->jumlah,
+            'status'=>'lembur'
+        ];
+        GajiModel::create($data);
+        AbsenModel::where('id',$request->id)->update([
+            'keterangan'=>'lembur_approve',
+        ]);
+        return redirect()->route('absen.lembur')->with('success','Data Berhasil Diperbarui');
     }
 
     /**
@@ -79,6 +90,9 @@ class LemburController extends Controller
      */
     public function destroy($id)
     {
-        //
+        AbsenModel::where('id',$id)->update([
+            'keterangan'=>'',
+        ]);
+        return redirect()->route('absen.lembur')->with('success','Data Berhasil Diperbarui');
     }
 }

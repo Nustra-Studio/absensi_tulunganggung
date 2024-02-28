@@ -53,6 +53,10 @@
                 <input type="number" name="uang_bensin" class="form-control" id="exampleInputUsername4" autocomplete="off" placeholder="">
             </div>
             <div class="mb-3">
+                <label for="exampleInputUsername4" class="form-label">Potongan Terlambat</label>
+                <input type="number" name="terlambat" class="form-control" id="exampleInputUsername4" autocomplete="off" placeholder="">
+            </div>
+            <div class="mb-3">
                 <label for="exampleFormControlSelect1" class="form-label">Tugas Di Cabang</label>
                 <select class="form-select" name="cabang" id="exampleFormControlSelect1">
                     @php
