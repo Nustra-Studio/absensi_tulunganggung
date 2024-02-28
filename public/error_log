@@ -1,0 +1,32 @@
+[06-Oct-2023 06:17:09 Asia/Jakarta] PHP Warning:  require(/home/nusn4456/public_html/absensi/public/../vendor/autoload.php): Failed to open stream: No such file or directory in /home/nusn4456/public_html/absensi/public/index.php on line 24
+[06-Oct-2023 06:17:09 Asia/Jakarta] PHP Fatal error:  Uncaught Error: Failed opening required '/home/nusn4456/public_html/absensi/public/../vendor/autoload.php' (include_path='.:/opt/alt/php81/usr/share/pear:/opt/alt/php81/usr/share/php:/usr/share/pear:/usr/share/php') in /home/nusn4456/public_html/absensi/public/index.php:24
+Stack trace:
+#0 {main}
+  thrown in /home/nusn4456/public_html/absensi/public/index.php on line 24
+[06-Oct-2023 06:17:12 Asia/Jakarta] PHP Warning:  require(/home/nusn4456/public_html/absensi/public/../vendor/autoload.php): Failed to open stream: No such file or directory in /home/nusn4456/public_html/absensi/public/index.php on line 24
+[06-Oct-2023 06:17:12 Asia/Jakarta] PHP Fatal error:  Uncaught Error: Failed opening required '/home/nusn4456/public_html/absensi/public/../vendor/autoload.php' (include_path='.:/opt/alt/php81/usr/share/pear:/opt/alt/php81/usr/share/php:/usr/share/pear:/usr/share/php') in /home/nusn4456/public_html/absensi/public/index.php:24
+Stack trace:
+#0 {main}
+  thrown in /home/nusn4456/public_html/absensi/public/index.php on line 24
+[06-Oct-2023 06:17:25 Asia/Jakarta] PHP Warning:  require(/home/nusn4456/public_html/absensi/public/../vendor/autoload.php): Failed to open stream: No such file or directory in /home/nusn4456/public_html/absensi/public/index.php on line 24
+[06-Oct-2023 06:17:25 Asia/Jakarta] PHP Fatal error:  Uncaught Error: Failed opening required '/home/nusn4456/public_html/absensi/public/../vendor/autoload.php' (include_path='.:/opt/alt/php81/usr/share/pear:/opt/alt/php81/usr/share/php:/usr/share/pear:/usr/share/php') in /home/nusn4456/public_html/absensi/public/index.php:24
+Stack trace:
+#0 {main}
+  thrown in /home/nusn4456/public_html/absensi/public/index.php on line 24
+[06-Oct-2023 06:17:27 Asia/Jakarta] PHP Warning:  require(/home/nusn4456/public_html/absensi/public/../vendor/autoload.php): Failed to open stream: No such file or directory in /home/nusn4456/public_html/absensi/public/index.php on line 24
+[06-Oct-2023 06:17:27 Asia/Jakarta] PHP Fatal error:  Uncaught Error: Failed opening required '/home/nusn4456/public_html/absensi/public/../vendor/autoload.php' (include_path='.:/opt/alt/php81/usr/share/pear:/opt/alt/php81/usr/share/php:/usr/share/pear:/usr/share/php') in /home/nusn4456/public_html/absensi/public/index.php:24
+Stack trace:
+#0 {main}
+  thrown in /home/nusn4456/public_html/absensi/public/index.php on line 24
+[06-Oct-2023 06:17:27 Asia/Jakarta] PHP Warning:  require(/home/nusn4456/public_html/absensi/public/../vendor/autoload.php): Failed to open stream: No such file or directory in /home/nusn4456/public_html/absensi/public/index.php on line 24
+[06-Oct-2023 06:17:27 Asia/Jakarta] PHP Fatal error:  Uncaught Error: Failed opening required '/home/nusn4456/public_html/absensi/public/../vendor/autoload.php' (include_path='.:/opt/alt/php81/usr/share/pear:/opt/alt/php81/usr/share/php:/usr/share/pear:/usr/share/php') in /home/nusn4456/public_html/absensi/public/index.php:24
+Stack trace:
+#0 {main}
+  thrown in /home/nusn4456/public_html/absensi/public/index.php on line 24
+[06-Oct-2023 06:17:28 Asia/Jakarta] PHP Warning:  require(/home/nusn4456/public_html/absensi/public/../vendor/autoload.php): Failed to open stream: No such file or directory in /home/nusn4456/public_html/absensi/public/index.php on line 24
+[06-Oct-2023 06:17:28 Asia/Jakarta] PHP Fatal error:  Uncaught Error: Failed opening required '/home/nusn4456/public_html/absensi/public/../vendor/autoload.php' (include_path='.:/opt/alt/php81/usr/share/pear:/opt/alt/php81/usr/share/php:/usr/share/pear:/usr/share/php') in /home/nusn4456/public_html/absensi/public/index.php:24
+Stack trace:
+#0 {main}
+  thrown in /home/nusn4456/public_html/absensi/public/index.php on line 24
+[06-Oct-2023 06:17:56 Asia/Jakarta] PHP Fatal error:  Composer detected issues in your platform: Your Composer dependencies require a PHP version ">= 8.1.0". You are running 7.4.33. in /home/nusn4456/public_html/absensi/vendor/composer/platform_check.php on line 24
+[14-Oct-2023 16:02:33 UTC] PHP Fatal error:  Cannot use App\AbsenModel as AbsenModel because the name is already in use in /home/nusn4456/public_html/absensi/app/Imports/SolutionsImport.php on line 8

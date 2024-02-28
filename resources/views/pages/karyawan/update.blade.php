@@ -24,10 +24,10 @@
         <div class="card-body">
 
             <h6 class="card-title">Update Karyawan</h6>
-            <form 
-            action="{{ route('karyawan.update', $data->id) }}" 
-            method="POST" 
-            enctype="multipart/form-data"    
+            <form
+            action="{{ route('karyawan.update', $data->id) }}"
+            method="POST"
+            enctype="multipart/form-data"
             class="forms-sample">
                 @csrf
                 @method('PUT')
@@ -89,7 +89,7 @@
         </select>
     </div>
             <button type="submit" class="btn btn-primary me-2">Submit</button>
-            <button  
+            <button
             onclick="window.history.go(-1); return false;"
             type="submit"
             value="Cancel" class="btn btn-secondary">Cancel</button>

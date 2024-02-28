@@ -1,4 +1,5 @@
 <?php
+use App\Http\Controllers\gaji;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,6 +18,7 @@ Route::middleware(['auth'])->group(function () {
     });
 });
 
+
     Route::group(['prefix'=>'database'], function(){
         Route::resource('cabang', cabang::class);
         Route::resource('shift', shift::class);
@@ -29,11 +31,14 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/lembur','absen@lembur')->name('absen.lembur');
         Route::get('/add/{id}','absen@add')->name('absen.add');
         Route::post('/add-store','absen@store');
-        Route::post('/penyusuaianlembur','absen@lembur');
         Route::post('/add-excel/{id}','absen@excel')->name('absen.excel');
         Route::get('/penyesuaian','absen@penyesuaian')->name('absen.penyesuaian');
     });
     Route::resource('gaji', gaji::class);
+    Route::get('/penggajian/{id}','gaji@gaji')->name('gaji.gaji');
+    Route::get('/gaji/ajax/{id}', [gaji::class, 'ajaxGaji']);
+
+
 
 
 // Route::group(['prefix' => 'email'], function(){

@@ -44,12 +44,6 @@
           </ul>
         </div>
       </li>
-      <li class="nav-item {{ active_class(['/setting']) }}">
-        <a href="{{ url('/setting') }}" class="nav-link">
-          <i class="link-icon" data-feather="settings"></i>
-          <span class="link-title">Setting</span>
-        </a>
-      </li>
       @endif
       <li class="nav-item nav-category">web apps</li>
       <li class="nav-item {{ active_class(['cabang/*']) }}">
@@ -91,28 +85,8 @@
           <span class="link-title">Lembur</span>
         </a>
       </li>
-      <li class="nav-item {{ active_class(['/absen/penyusaian']) }}">
-        <a href="{{ url('/absen/penyesuaian') }}" class="nav-link">
-          <i class="link-icon" data-feather="check"></i>
-          <span class="link-title">Penyesuaian</span>
-        </a>
-      </li>
-      <!-- <li class="nav-item {{ active_class(['penyesuaian/*']) }}">
-        <a class="nav-link" data-bs-toggle="collapse" href="#penyesuaian" role="button" aria-expanded="{{ is_active_route(['email/*']) }}" aria-controls="email">
-          <i class="link-icon" data-feather="check"></i>
-          <span class="link-title">Penyesuaian</span>
-          <i class="link-arrow" data-feather="chevron-down"></i>
-        </a>
-        <div class="collapse {{ show_class(['penyesuaian/*']) }}" id="penyesuaian">
-          <ul class="nav sub-menu">
-              @foreach ($data as $item)
-              <li class="nav-item">
-                <a href="{{ url("/absen/penyesuaian/$item->id") }}" class="nav-link {{ active_class(["penyesuain/$item->id"]) }}">{{$item->nama}}</a>
-              </li>
-              @endforeach
-          </ul>
-        </div>
-      </li> -->
+
+    
       <li class="nav-item {{ active_class(['/gaji']) }}">
         <a href="{{ url('/gaji') }}" class="nav-link">
           <i class="link-icon" data-feather="dollar-sign"></i>
