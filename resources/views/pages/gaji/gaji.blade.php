@@ -60,7 +60,7 @@
                 <tr>
                     <td>{{ $loop->index+1 }}</td>
                     <td>{{ "Rp " . number_format($gaji->jumlah, 0, ',', '.') }}</td>
-                    <td>{{ "Rp " . number_format($minutes_difference * $gpm, 0, ',', '.') }} / {{$minutes_difference}}</td>
+                    <td>{{ "Rp " . number_format($telat, 0, ',', '.') }} / {{$minutes_difference}}</td>
                     <td>{{ $item->absen_masuk }}</td>
                     <td>{{ $item->absen_pulang ?? 0 }}</td>
                     <td>{{$item->keterangan}}</td>
