@@ -35,6 +35,7 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/penyesuaian','absen@penyesuaian')->name('absen.penyesuaian');
     });
     Route::resource('gaji', gaji::class);
+    Route::get('/slipgaji','gaji@exportgaji')->name('gaji.slip');
     Route::get('/penggajian/{id}','gaji@gaji')->name('gaji.gaji');
     Route::get('/gaji/ajax/{id}', [gaji::class, 'ajaxGaji']);
 

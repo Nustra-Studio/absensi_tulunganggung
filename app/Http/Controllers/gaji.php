@@ -63,6 +63,10 @@ class gaji extends Controller
         //->whereBetween('created_at', [$tanggal_awal, $tanggal_akhir])
         return view("pages.gaji.show",compact("data", "idd", "iddd"));
     }
+    public function exportgaji(Request $request){
+        $mo = $request->input('mo');
+        return view("pages.gaji.slip",compact("mo"));
+    }
 
 
     public function gaji(Request $request, $id)
@@ -92,7 +96,7 @@ class gaji extends Controller
         $end_time = $sm ? Carbon::createFromFormat('H:i', $sm) : null;
         // for showing the data $minutes_difference ?? 'N/A'
         $minutes_difference = $end_time ? $end_time->diffInMinutes($start_time) : null;
-        $start_time = Carbon::createFromFormat('H:i', $nshift->jam_masuk);
+        $start_time = Carbon::createFromFormat('H:i', $sm);
 
         $end_time = Carbon::createFromFormat('H:i', $nshift->jam_pulang);
         $gaji = GajiModel::where('id_pegawai', $id)->first();
