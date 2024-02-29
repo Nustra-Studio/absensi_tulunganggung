@@ -77,8 +77,8 @@ class gaji extends Controller
 
         // Apply filtering based on status if it's provided
         if ($status) {
-            $absen = $absen->filter(function ($item) use ($mo, $status,$keterangan) {
-                return Carbon::parse($item->tanggal)->format('Y-m') == $mo && $item->status == $status;
+            $absen = $absen->filter(function ($item) use ($mo) {
+                return Carbon::parse($item->tanggal)->format('Y-m') == $mo;
             });
         } else {
             // If no status is provided, simply filter based on the month
