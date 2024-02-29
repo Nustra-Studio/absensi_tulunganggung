@@ -75,17 +75,16 @@ class gaji extends Controller
         $item = AbsenModel::where('id_pegawai', $mo)->first();
         $absen = AbsenModel::where('id_pegawai', $idd)->get();
 
-        // Apply filtering based on status if it's provided
-        if ($status) {
-            $absen = $absen->filter(function ($item) use ($mo) {
-                return Carbon::parse($item->tanggal)->format('Y-m') == $mo;
-            });
-        } else {
-            // If no status is provided, simply filter based on the month
-            $absen = $absen->filter(function ($item) use ($mo) {
-                return Carbon::parse($item->tanggal)->format('Y-m') == $mo;
-            });
-        }
+        $absen = AbsenModel::where('id_pegawai', $idd)
+            ->whereYear('tanggal', '=', Carbon::parse($mo)->year)
+            ->whereMonth('tanggal', '=', Carbon::parse($mo)->month);
+        // if ($status) {
+        //     $absen->where('status', $status);
+        // }
+        // if ($keterangan) {
+        //     $absen->where('keterangan', $keterangan);
+        // }
+        $absen = $absen->get();
 
         // The rest of your code remains unchanged...
         $karyawan = KaryawanModel::where('id_absen', $idd)->first();
