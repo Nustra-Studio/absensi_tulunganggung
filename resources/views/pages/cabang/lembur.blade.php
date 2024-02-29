@@ -58,7 +58,12 @@
                     $id_pegawai =KaryawanModel::where('id_absen',$item->id_pegawai)->value('id');
                     $gaji = GajiModel::where('id_pegawai',$id_pegawai)->
                             where('status','gaji_pokok')->first();
-                    $gaji_menit = $gaji->jumlah / 43200;
+                    if(!empty($gaji)){
+                      $gaji_menit = $gaji->jumlah / 43200;
+                    }
+                    else{
+                      $gaji_menit = 0;
+                    }
                     $shift = KaryawanModel::where('id_absen',$item->id_pegawai)->value('id_shift');
                     $shift_pulang = ShiftModel::where('id',$shift)->value('jam_pulang');
                     $shift_pulang = Carbon::parse($shift_pulang);

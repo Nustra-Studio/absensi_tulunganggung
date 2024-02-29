@@ -40,9 +40,9 @@
                 <tr>
                   <th>No</th>
                   <th>Gaji Utama</th>
-                  <th>Pengurangan / Menit Terlambat</th>
-                  <th>Penambahan</th>
-                  <th>tes</th>
+                  <th>Potongan Terlambat</th>
+                  <th>Lembur</th>
+                  <th>Tunjangan</th>
                   <th>Action</th>
                 </tr>
               </thead>
@@ -52,6 +52,7 @@
                     $start_time = Carbon::createFromFormat('H:i', $item->absen_masuk);
                     $end_time = $sm ? Carbon::createFromFormat('H:i', $sm) : null;
                     $minutes_difference = $end_time ? $end_time->diffInMinutes($start_time) : null;
+
                     $telat = $minutes_difference * $gpm;
                     $finalValue = $gaji->jumlah - $telat;
                     $finalValue = ($finalValue == $gaji->jumlah) ? 0 : $finalValue;
@@ -99,7 +100,7 @@
 
             // Jika checkbox "Lembur" dicentang, tambahkan parameter lembur
             if (lemburChecked) {
-                newUrl += '&status=' + status + '&lembur=true';
+                newUrl += '&status=' + status + '&keterangan=lembur_approve';
             }
 
 

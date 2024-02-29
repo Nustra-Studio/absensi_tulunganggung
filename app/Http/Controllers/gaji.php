@@ -70,13 +70,14 @@ class gaji extends Controller
         $mo = $request->input('mo');
         $idd = $request->input('idd');
         $status = $request->input('status');
+        $keterangan = $request->input('keterangan');
 
         $item = AbsenModel::where('id_pegawai', $mo)->first();
         $absen = AbsenModel::where('id_pegawai', $idd)->get();
 
         // Apply filtering based on status if it's provided
         if ($status) {
-            $absen = $absen->filter(function ($item) use ($mo, $status) {
+            $absen = $absen->filter(function ($item) use ($mo, $status,$keterangan) {
                 return Carbon::parse($item->tanggal)->format('Y-m') == $mo && $item->status == $status;
             });
         } else {
@@ -152,16 +153,19 @@ class gaji extends Controller
         $mo = $request->input('mo');
         $idd = $request->input('idd');
         $status = $request->input('status');
+        $keterangan = $request->input('keterangan');
 
         $item = AbsenModel::where('id_pegawai', $mo)->first();
         $absen = AbsenModel::where('id_pegawai', $idd)->get();
 
+        // Apply filtering based on status if it's provided
         if ($status) {
-            $absen = $absen->filter(function ($item) use ($mo, $status) {
+            $absen = $absen->filter(function ($item) use ($mo, $status,$keterangan) {
                 return Carbon::parse($item->tanggal)->format('Y-m') == $mo && $item->status == $status;
             });
         } else {
-            $absen = $absen->filter(function ($item) use ($mo, $status) {
+            // If no status is provided, simply filter based on the month
+            $absen = $absen->filter(function ($item) use ($mo) {
                 return Carbon::parse($item->tanggal)->format('Y-m') == $mo;
             });
         }
