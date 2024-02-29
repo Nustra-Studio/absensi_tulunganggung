@@ -110,7 +110,7 @@ class gaji extends Controller
                             ->whereNot('status', 'gaji_pokok')->sum('jumlah');
 
         // Display the filtered dates (you can remove this line if not needed for debugging)
-        return view("pages.gaji.gaji", compact("tujangan","gaji_pokok","item", "absen", "gaji", "sm", "sp","karyawan","salary_menit"));
+        return view("pages.gaji.gaji", compact("tunjangan","gaji_pokok","item", "absen", "gaji", "sm", "sp","karyawan","salary_menit"));
     }
 
 
