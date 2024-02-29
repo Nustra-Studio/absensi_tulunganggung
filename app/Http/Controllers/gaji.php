@@ -155,7 +155,7 @@ class gaji extends Controller
         $status = $request->input('status');
         $keterangan = $request->input('keterangan');
 
-        $item = AbsenModel::where('id_pegawai', $mo)->first();
+        $item = AbsenModel::where('id_pegawai', $idd)->first();
         $absen = AbsenModel::where('id_pegawai', $idd)->get();
 
         // Apply filtering based on status if it's provided
