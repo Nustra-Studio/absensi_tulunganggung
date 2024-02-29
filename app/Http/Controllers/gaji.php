@@ -103,12 +103,13 @@ class gaji extends Controller
 
         $end_time = Carbon::createFromFormat('H:i', $nshift->jam_pulang);
         $gaji = GajiModel::where('id_pegawai', $id)->first();
+        $gaji_pokok = GajiModel::where('id_pegawai', $id)->where('status','gaji_pokok')->value('jumlah');
         $mnt = $end_time ? $end_time->diffInMinutes($start_time) : null;
-        $gpm = intval($gaji->jumlah / $mnt);
+        $salary_menit = $gaji_pokok / $mnt;
         $fn = $absen->all();
 
         // Display the filtered dates (you can remove this line if not needed for debugging)
-        return view("pages.gaji.gaji", compact("item", "absen", "gaji", "sm", "sp", "gpm"));
+        return view("pages.gaji.gaji", compact("gaji_pokok","item", "absen", "gaji", "sm", "sp","karyawan","salary_menit"));
     }
 
 

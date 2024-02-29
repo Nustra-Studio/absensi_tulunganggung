@@ -1,6 +1,7 @@
 @extends('layout.master')
 @php
     use Carbon\Carbon;
+    use App\PotonganModel;
 @endphp
 
 @push('plugin-styles')
@@ -19,7 +20,7 @@
     <div class="card">
         <div class="card-header text-start">
             <h4 class="card-title">Data Karyawan</h4>
-            <div class="btn-group" role="group" aria-label="Filter Status">
+            {{-- <div class="btn-group" role="group" aria-label="Filter Status">
                 <input type="checkbox" id="filterAll" name="filterStatus[]" class="btn-check" autocomplete="off" checked>
                 <label class="btn btn-primary m-1" for="filterAll">Semua</label>
 
@@ -31,7 +32,7 @@
 
                 <input type="checkbox" id="filterOvertime" name="filterStatus[]" class="btn-check" autocomplete="off">
                 <label class="btn btn-primary m-1" for="filterOvertime">Lembur</label>
-            </div>
+            </div> --}}
         </div>
       <div class="card-body">
         <div class="table-responsive">
@@ -52,7 +53,13 @@
                     $start_time = Carbon::createFromFormat('H:i', $item->absen_masuk);
                     $end_time = $sm ? Carbon::createFromFormat('H:i', $sm) : null;
                     $minutes_difference = $end_time ? $end_time->diffInMinutes($start_time) : null;
-
+                    $potongan = PotonganModel::where('id_pegawai',$karyawan->id)
+                                                ->where('status','terlambat')
+                                                ->value('jumlah');
+                    if(empty($potongan)){
+                        $potongan = 0;
+                    }
+                    $potongan = $potongan * $gaji_pokok;
                     $telat = $minutes_difference * $gpm;
                     $finalValue = $gaji->jumlah - $telat;
                     $finalValue = ($finalValue == $gaji->jumlah) ? 0 : $finalValue;
@@ -61,7 +68,7 @@
                 <tr>
                     <td>{{ $loop->index+1 }}</td>
                     <td>{{ "Rp " . number_format($gaji->jumlah, 0, ',', '.') }}</td>
-                    <td>{{ "Rp " . number_format($telat, 0, ',', '.') }} / {{$minutes_difference}}</td>
+                    <td>{{ "Rp " . number_format($potongan, 0, ',', '.') }}</td>
                     <td>{{ $item->absen_masuk }}</td>
                     <td>{{ $item->absen_pulang ?? 0 }}</td>
                     <td>{{$item->keterangan}}</td>
