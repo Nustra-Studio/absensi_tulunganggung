@@ -63,7 +63,18 @@
                     $end_time = $sp ? Carbon::createFromFormat('H:i', $sp) : null;
                     $finsh_time =$item->absen_pulang ? Carbon::createFromFormat('H:i', $item->absen_pulang) : null;
                     $total_time = $end_time ? $end_time->diffInMinutes($finsh_time ) : null;
-                    $lembur = $salary_menit * $total_time;
+                    if($item->keterangan === "lembur_approve"){
+                      $lembur = $salary_menit * $total_time;
+                      $total_time = $total_time "menit";
+                    }
+                    elseeif($item->keterangan === "lembur"){
+                      $lembur = 0;
+                      $total_time = "Lembur Not approve";
+                    }
+                    else{
+                      $lembur = 0;
+                      $total_time = " ";
+                    }
                     // $telat = $minutes_difference * $gpm;
                     // $finalValue = $gaji->jumlah - $telat;
                     // $finalValue = ($finalValue == $gaji->jumlah) ? 0 : $finalValue;
@@ -73,7 +84,7 @@
                     <td>{{ $loop->index+1 }}</td>
                     <td>{{ "Rp " . number_format($gaji->jumlah, 0, ',', '.') }}</td>
                     <td>{{ "Rp " . number_format($potongan, 0, ',', '.') }}</td>
-                    <td>{{ "Rp " . number_format($lembur, 0, ',', '.')}}|{{$total_time }} menit</td>
+                    <td>{{ "Rp " . number_format($lembur, 0, ',', '.')}} | {{$total_time }} </td>
                     <td>{{ "Rp " . number_format($tunjangan, 0, ',', '.') }}</td>
                     <td>{{$item->keterangan}}</td>
                 </tr>
