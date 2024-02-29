@@ -154,31 +154,15 @@ class gaji extends Controller
         $idd = $request->input('idd');
         $status = $request->input('status');
         $keterangan = $request->input('keterangan');
-
-        $item = AbsenModel::where('id_pegawai', $idd)->first();
-        $absen = AbsenModel::where('id_pegawai', $idd)->get();
-
-        // Apply filtering based on status if it's provided
+        $absen = AbsenModel::where('id_pegawai', $idd)
+            ->whereYear('tanggal', '=', Carbon::parse($mo)->year)
+            ->whereMonth('tanggal', '=', Carbon::parse($mo)->month);
         if ($status) {
-            $absen = $absen->where('status', $status)
-                            ->whereYear('tanggal', '=', Carbon::parse($mo)->year)
-                            ->whereMonth('tanggal', '=', Carbon::parse($mo)->month);
-
+            $absen->where('status', $status);
         }
-
-        // Apply filtering based on month
-        if ($mo) {
-            $absen = $absen->whereYear('tanggal', '=', Carbon::parse($mo)->year)
-                            ->whereMonth('tanggal', '=', Carbon::parse($mo)->month);
-        }
-
-        // Apply filtering based on keterangan if it's provided
         if ($keterangan) {
-            $absen = $absen->where('keterangan', $keterangan)
-                            ->whereYear('tanggal', '=', Carbon::parse($mo)->year)
-                            ->whereMonth('tanggal', '=', Carbon::parse($mo)->month);
+            $absen->where('keterangan', $keterangan);
         }
-
         $absen = $absen->get();
 
 
