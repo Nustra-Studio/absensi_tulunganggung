@@ -78,12 +78,6 @@ class gaji extends Controller
         $absen = AbsenModel::where('id_pegawai', $idd)
             ->whereYear('tanggal', '=', Carbon::parse($mo)->year)
             ->whereMonth('tanggal', '=', Carbon::parse($mo)->month);
-        // if ($status) {
-        //     $absen->where('status', $status);
-        // }
-        // if ($keterangan) {
-        //     $absen->where('keterangan', $keterangan);
-        // }
         $absen = $absen->get();
 
         // The rest of your code remains unchanged...
@@ -106,8 +100,10 @@ class gaji extends Controller
         $mnt = $end_time ? $end_time->diffInMinutes($start_time) : null;
         $salary_menit = $gaji_pokok / $mnt;
         $fn = $absen->all();
-        $tunjangan =GajiModel::where('id_pegawai', $id)
-                            ->whereNot('status', 'gaji_pokok')->sum('jumlah');
+        $tunjangan = GajiModel::where('id_pegawai', $id)
+                        ->whereNotIn('status', ['gaji_pokok']) // Mengabaikan baris dengan status 'gaji_pokok'
+                        ->sum('jumlah');
+
 
         // Display the filtered dates (you can remove this line if not needed for debugging)
         return view("pages.gaji.gaji", compact("tunjangan","gaji_pokok","item", "absen", "gaji", "sm", "sp","karyawan","salary_menit"));
