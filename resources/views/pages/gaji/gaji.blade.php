@@ -56,7 +56,7 @@
                     $potongan = PotonganModel::where('id_pegawai',$karyawan->id)
                                                 ->where('status','terlambat')
                                                 ->value('jumlah');
-                    if(empty($potongan)){
+                    if($item->status === "tepat_waktu"){
                         $potongan = 0;
                     }
                     $potongan = $potongan * $gaji_pokok;
