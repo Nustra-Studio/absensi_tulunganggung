@@ -73,7 +73,7 @@
                     <td>{{ $loop->index+1 }}</td>
                     <td>{{ "Rp " . number_format($gaji->jumlah, 0, ',', '.') }}</td>
                     <td>{{ "Rp " . number_format($potongan, 0, ',', '.') }}</td>
-                    <td>{{ "Rp " . number_format($lembur, 0, ',', '.')|$total_time_lembur "menit" }}</td>
+                    <td>{{ "Rp " . number_format($lembur, 0, ',', '.')|$total_time }} menit</td>
                     <td>{{ "Rp " . number_format($tunjangan, 0, ',', '.') }}</td>
                     <td>{{$item->keterangan}}</td>
                 </tr>
