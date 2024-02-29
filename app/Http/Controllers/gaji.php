@@ -98,7 +98,7 @@ class gaji extends Controller
         $gaji = GajiModel::where('id_pegawai', $id)->first();
         $gaji_pokok = GajiModel::where('id_pegawai', $id)->where('status','gaji_pokok')->value('jumlah');
         $mnt = $end_time ? $end_time->diffInMinutes($start_time) : null;
-        $salary_menit = $gaji_pokok / $mnt;
+        $salary_menit = $gaji_pokok / $mnt / 60;
         $fn = $absen->all();
         $tunjangan = GajiModel::where('id_pegawai', $id)
                         ->whereNotIn('status', ['gaji_pokok']) // Mengabaikan baris dengan status 'gaji_pokok'
