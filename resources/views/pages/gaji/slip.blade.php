@@ -107,6 +107,7 @@
                         ->whereMonth('tanggal', '=', Carbon::parse($mo)->month)
                         ->get();
                 $terlambat = $absen->where('keterangan', 'tidak_tepat_waktu')->count();
+                $jumlah = $absen->where('id_pegawai', $idd)->count();
                 $nshift = ShiftModel::where('id', $item->id_shift)->first();
                 $sm = $nshift->jam_masuk;
                 $sp = $nshift->jam_pulang;
@@ -126,23 +127,32 @@
                                                 ->where('status','terlambat')
                                                 ->value('jumlah');
                 $potongan_terlambat = $terlambat * $potongan /100;
-
+                // gaji pokok
+                $gaji_pokok = $gaji_pokok * $jumlah;
+                // uang bensin 
+                $uang_bensin = GajiModel::where('id_pegawai', $id)
+                                ->where('status', 'uang_bensin') // Mengabaikan baris dengan status 'gaji_pokok'
+                                ->value('jumlah');
+                //uang makan 
+                $uang_makan = GajiModel::where('id_pegawai', $id)
+                                ->where('status', 'uang_makan') // Mengabaikan baris dengan status 'gaji_pokok'
+                                ->value('jumlah');
             @endphp
             <div class="slip">
-                <div class="company-name">Nama Perusahaan Anda</div>
+                <div class="company-name">Cinta Bunda</div>
                 <h2>Slip Gaji</h2>
                 <div class="info">
                     <div class="info-item">
                         <span>Nama:</span>
-                        <span>John Doe</span>
+                        <span>{{$item->name}}</span>
                     </div>
                     <div class="info-item">
                         <span>Jabatan:</span>
-                        <span>Manager</span>
+                        <span>{{$item->jabatan}}</span>
                     </div>
                     <div class="info-item">
                         <span>Tanggal:</span>
-                        <span>29 Februari 2024</span>
+                        <span>{{date('Y-M-d')}}</span>
                     </div>
                 </div>
                 <table class="salary-details">
@@ -155,17 +165,20 @@
                         </tr>
                         <tr>
                             <td>Gaji Pokok</td>
-                            <td>Rp 10.000.000</td>
+                            <td>{{$gaji_pokok}}</td>
+                            <td>Terlambat</td>
+                            <td>{{$potongan_terlambat}}</td>
+                        </tr>
+                        <tr>
+                            <td>Uang Bensin</td>
+                            <td>{{$uang_bensin}}</td>
+                            <td></td>
                             <td></td>
                         </tr>
                         <tr>
-                            <td>Tunjangan</td>
-                            <td>Rp 2.000.000</td>
+                            <td>Uang Makan</td>
+                            <td>{{$uang_makan}}</td>
                             <td></td>
-                        </tr>
-                        <tr>
-                            <td>Bonus</td>
-                            <td>Rp 1.000.000</td>
                             <td></td>
                         </tr>
                         <tr class="total">
