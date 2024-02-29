@@ -60,7 +60,7 @@
                         $potongan = 0;
                     }
                     $potongan = $potongan * $gaji_pokok;
-                    $telat = $minutes_difference * $gpm;
+                    // $telat = $minutes_difference * $gpm;
                     $finalValue = $gaji->jumlah - $telat;
                     $finalValue = ($finalValue == $gaji->jumlah) ? 0 : $finalValue;
                 @endphp
