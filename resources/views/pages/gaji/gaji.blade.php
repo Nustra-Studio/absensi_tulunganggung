@@ -44,7 +44,6 @@
                   <th>Potongan Terlambat</th>
                   <th>Lembur</th>
                   <th>Tunjangan</th>
-                  <th>Action</th>
                 </tr>
               </thead>
               <tbody id="tb-category">
@@ -59,7 +58,7 @@
                     if($item->status === "tepat_waktu"){
                         $potongan = 0;
                     }
-                    $potongan = $potongan * $gaji_pokok;
+                    $potongan = $potongan * $gaji_pokok / 100;
                     $end_time = $sp ? Carbon::createFromFormat('H:i', $sp) : null;
                     $finsh_time =$item->absen_pulang ? Carbon::createFromFormat('H:i', $item->absen_pulang) : null;
                     $total_time = $end_time ? $end_time->diffInMinutes($finsh_time ) : null;
@@ -85,7 +84,6 @@
                     <td>{{ "Rp " . number_format($potongan, 0, ',', '.') }}</td>
                     <td>{{ "Rp " . number_format($lembur, 0, ',', '.')}} | {{$total_time }} </td>
                     <td>{{ "Rp " . number_format($tunjangan, 0, ',', '.') }}</td>
-                    <td>{{$item->keterangan}}</td>
                 </tr>
             @endforeach
 
