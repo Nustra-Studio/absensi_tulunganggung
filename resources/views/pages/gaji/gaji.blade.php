@@ -62,8 +62,8 @@
                     $potongan = $potongan * $gaji_pokok;
                     $end_time = $sp ? Carbon::createFromFormat('H:i', $sp) : null;
                     $finsh_time = Carbon::createFromFormat('H:i', $item->absen_pulang);
-                    $total_time_lembur = $end_time ? $end_time->diffInMinutes($finsh_time ) : null;
-                    $lembur = $salary_menit * $total_time_lembur;
+                    $total_time = $end_time ? $end_time->diffInMinutes($finsh_time ) : null;
+                    $lembur = $salary_menit * $total_time;
                     // $telat = $minutes_difference * $gpm;
                     // $finalValue = $gaji->jumlah - $telat;
                     // $finalValue = ($finalValue == $gaji->jumlah) ? 0 : $finalValue;
