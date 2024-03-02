@@ -20,19 +20,18 @@
     <div class="card">
         <div class="card-header text-start">
             <h4 class="card-title">Data Karyawan</h4>
-            {{-- <div class="btn-group" role="group" aria-label="Filter Status">
-                <input type="checkbox" id="filterAll" name="filterStatus[]" class="btn-check" autocomplete="off" checked>
-                <label class="btn btn-primary m-1" for="filterAll">Semua</label>
-
-                <input type="checkbox" id="filterOnTime" name="filterStatus[]" class="btn-check" autocomplete="off">
-                <label class="btn btn-primary m-1" for="filterOnTime">Tepat Waktu</label>
-
-                <input type="checkbox" id="filterLate" name="filterStatus[]" class="btn-check" autocomplete="off">
-                <label class="btn btn-primary m-1" for="filterLate">Terlambat</label>
-
-                <input type="checkbox" id="filterOvertime" name="filterStatus[]" class="btn-check" autocomplete="off">
-                <label class="btn btn-primary m-1" for="filterOvertime">Lembur</label>
-            </div> --}}
+            <div class="btn-group" role="group" aria-label="Basic example">
+              <a href="{{url("slipgaji/?mo=$mo")}}"  class="btn btn-primary">cetak all</a>
+              <a href="{{url("slipgaji/?mo=$mo&idd=$idd")}}"  class="btn btn-primary">Cetak Perorang</a>
+              <form id="form-delete-{{ $idd }}" action="{{ route('gaji.store') }}" method="POST" style="display: none;">
+                @csrf
+                <input type="hidden" name="mo" value="{{$mo}}">
+                <input type="hidden" name="idd" value="{{$idd}}">
+                <input type="hidden" value="change" name="keterangan">
+            </form>
+              <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal">Add</button>
+              <button type="button" class="btn btn-danger delete-button" data-form-delete="{{ $idd }}">Clear Lembur</button>
+            </div>
         </div>
       <div class="card-body">
         <div class="table-responsive">
@@ -94,7 +93,37 @@
     </div>
   </div>
 </div>
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form  action="{{ route('gaji.store') }}" method="POST" class="forms-sample">
+          @csrf
+          <div class="mb-3">
+            <label for="exampleInputUsername1" class="form-label">Bonus</label>
+            <input type="number" name="bonus" class="form-control" id="exampleInputUsername1">
+        </div>
+        <div class="mb-3">
+          <label for="exampleInputUsername1" class="form-label">Potongan Tambahan</label>
+          <input type="number" name="potongan" class="form-control" id="exampleInputUsername1">
+      </div>
+        <input type="hidden" value="add" name="keterangan">
+        <input type="hidden" value="{{$karyawan->id}}" name="id_karyawan">
+        <input type="hidden" name="mo" value="{{$mo}}">
 
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-primary">Save changes</button>
+      </form>
+      </div>
+    </div>
+  </div>
+</div>
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 <script>
     $(document).ready(function () {
@@ -180,5 +209,6 @@
 @endpush
 
 @push('custom-scripts')
+  
   <script src="{{ asset('assets/js/data-table.js') }}"></script>
 @endpush

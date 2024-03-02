@@ -7,6 +7,7 @@
         use App\GajiModel;
         use App\ShiftModel;
         use App\KaryawanModel;
+        use App\PotonganModel;
 
     @endphp
 <meta charset="UTF-8">
@@ -96,7 +97,12 @@
 <body>
 <div class="page">
     @php
-        $data = KaryawanModel::all();
+        if(empty($idd)){
+            $data = KaryawanModel::all();
+        }
+        else {
+            $data = KaryawanModel::where('id_absen', $idd)->get();
+        }
     @endphp
         @foreach ($data as $item)
             @php
@@ -106,7 +112,7 @@
                         ->whereYear('tanggal', '=', Carbon::parse($mo)->year)
                         ->whereMonth('tanggal', '=', Carbon::parse($mo)->month)
                         ->get();
-                $terlambat = $absen->where('keterangan', 'tidak_tepat_waktu')->count();
+                $terlambat = $absen->where('status', 'tidak_tepat_waktu')->count();
                 $jumlah = $absen->where('id_pegawai', $idd)->count();
                 $nshift = ShiftModel::where('id', $item->id_shift)->first();
                 $sm = $nshift->jam_masuk;
@@ -123,20 +129,49 @@
                                 ->whereNotIn('status', ['gaji_pokok']) // Mengabaikan baris dengan status 'gaji_pokok'
                                 ->sum('jumlah');
                 // potongan terlambat
-                $potongan = PotonganModel::where('id_pegawai',$item->id)
+                $potongan = PotonganModel::where('id_pegawai',$id)
                                                 ->where('status','terlambat')
                                                 ->value('jumlah');
-                $potongan_terlambat = $terlambat * $potongan /100;
+                $potongan_terlambat =$gaji_pokok * $terlambat * $potongan /100;
                 // gaji pokok
                 $gaji_pokok = $gaji_pokok * $jumlah;
                 // uang bensin 
                 $uang_bensin = GajiModel::where('id_pegawai', $id)
                                 ->where('status', 'uang_bensin') // Mengabaikan baris dengan status 'gaji_pokok'
                                 ->value('jumlah');
+                $uang_bensin = $uang_bensin * $jumlah;
                 //uang makan 
                 $uang_makan = GajiModel::where('id_pegawai', $id)
                                 ->where('status', 'uang_makan') // Mengabaikan baris dengan status 'gaji_pokok'
                                 ->value('jumlah');
+                $uang_makan = $uang_makan * $jumlah;
+                // lembur
+                $offer_time = 0;
+                foreach ($absen as $key => $value) {
+                    $end_time = $sp ? Carbon::createFromFormat('H:i', $sp) : null;
+                    $finsh_time =$value->absen_pulang ? Carbon::createFromFormat('H:i', $value->absen_pulang) : null;
+                    $total_time = $end_time ? $end_time->diffInMinutes($finsh_time ) : null;
+                    if ($value->keterangan === "lembur_approve") {
+                            $lembur = $salary_menit * $total_time;
+                            $offer_time += $lembur;
+                        }
+                }
+                // potongan tambahan
+                $potongan_tambahan = PotonganModel::where('id_pegawai',$id)
+                                                ->where('status','tambahan')
+                                                ->where('keterangan',$mo)
+                                                ->value('jumlah');
+                // bonus
+                $bonus = GajiModel::where('id_pegawai', $id)
+                                                ->where('status','bonus')
+                                                ->where('keterangan',$mo)
+                                                ->value('jumlah');
+                // date
+                $date = Carbon::createFromFormat('Y-m', $mo);
+                $date = $date->format('Y-F');
+                 // pendapatan
+                    $total = $bonus + $offer_time + $uang_bensin + $uang_makan + $gaji_pokok - $potongan_terlambat -  $potongan_tambahan;
+
             @endphp
             <div class="slip">
                 <div class="company-name">Cinta Bunda</div>
@@ -144,7 +179,7 @@
                 <div class="info">
                     <div class="info-item">
                         <span>Nama:</span>
-                        <span>{{$item->name}}</span>
+                        <span>{{$item->nama}}</span>
                     </div>
                     <div class="info-item">
                         <span>Jabatan:</span>
@@ -152,7 +187,7 @@
                     </div>
                     <div class="info-item">
                         <span>Tanggal:</span>
-                        <span>{{date('Y-M-d')}}</span>
+                        <span>{{$date}}</span>
                     </div>
                 </div>
                 <table class="salary-details">
@@ -165,43 +200,37 @@
                         </tr>
                         <tr>
                             <td>Gaji Pokok</td>
-                            <td>{{$gaji_pokok}}</td>
+                            <td>{{"Rp " . number_format($gaji_pokok, 0, ',', '.')}}</td>
                             <td>Terlambat</td>
-                            <td>{{$potongan_terlambat}}</td>
+                            <td>{{"Rp " . number_format($potongan_terlambat, 0, ',', '.')}}</td>
                         </tr>
                         <tr>
                             <td>Uang Bensin</td>
-                            <td>{{$uang_bensin}}</td>
-                            <td></td>
-                            <td></td>
+                            <td>{{"Rp " . number_format($uang_bensin, 0, ',', '.')}}</td>
+                            <td>Lain-Lain</td>
+                            <td>{{"Rp " . number_format($potongan_tambahan, 0, ',', '.')}}</td>
                         </tr>
                         <tr>
                             <td>Uang Makan</td>
-                            <td>{{$uang_makan}}</td>
+                            <td>{{"Rp " . number_format($uang_makan, 0, ',', '.')}}</td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>Lembur</td>
+                            <td>{{"Rp " . number_format($offer_time, 0, ',', '.')}}</td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>Bonus</td>
+                            <td>{{"Rp " . number_format($bonus, 0, ',', '.')}}</td>
                             <td></td>
                             <td></td>
                         </tr>
                         <tr class="total">
-                            <td>Total Pendapatan</td>
-                            <td colspan="2">Rp 13.000.000</td>
-                        </tr>
-                        <tr>
-                            <td>Potongan Pajak</td>
-                            <td></td>
-                            <td>Rp 1.500.000</td>
-                        </tr>
-                        <tr>
-                            <td>Potongan Lain-lain</td>
-                            <td></td>
-                            <td>Rp 500.000</td>
-                        </tr>
-                        <tr class="total">
-                            <td>Total Potongan</td>
-                            <td colspan="2">Rp 2.000.000</td>
-                        </tr>
-                        <tr class="grand-total">
-                            <td>Take Home Pay</td>
-                            <td colspan="2">Rp 11.000.000</td>
+                            <td>Total Pendapatan:</td>
+                            <td colspan="3">{{"Rp " . number_format($total, 0, ',', '.')}}</td>
                         </tr>
                         </table>
                 </table>
@@ -209,5 +238,14 @@
         @endforeach
     
 </div>
+<script>
+    window.onload = function() {
+        window.print();
+    }
+    window.onafterprint = function(event) {
+        // Kembali ke URL sebelumnya menggunakan window.history
+        window.history.back();
+    };
+</script>
 </body>
 </html>

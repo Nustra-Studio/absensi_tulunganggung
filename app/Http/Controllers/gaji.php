@@ -9,6 +9,7 @@ use Carbon\Carbon;
 use App\AbsenModel;
 use App\GajiModel;
 use App\ShiftModel;
+use App\PotonganModel;
 
 
 
@@ -43,8 +44,39 @@ class gaji extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
-        //
+    {   
+        if($request->input('keterangan') === 'change'){
+            $mo = $request->input('mo');
+            $idd = $request->input('idd');
+            $absen = AbsenModel::where('id_pegawai', $idd)
+            ->whereYear('tanggal', '=', Carbon::parse($mo)->year)
+            ->whereMonth('tanggal', '=', Carbon::parse($mo)->month)
+            ->where('keterangan', 'lembur');
+            $absen->update(['keterangan' => '']);
+            return redirect()->back();
+        }
+        else{
+            $mo = $request->input('mo');
+            $bonus = $request->input('bonus');
+            $id = $request->input('id_karyawan');
+            $potongan = $request->input('potongan');
+            $bonus = [
+                'id_pegawai'=>$id,
+                'jumlah'=>$bonus,
+                'status'=>"bonus",
+                'keterangan'=>$mo
+            ];
+            $terlambat = [
+                'nama'=>'tambahan',
+                'id_pegawai'=>$id,
+                'jumlah'=>$potongan,
+                'status'=>"tambahan",
+                'keterangan'=>$mo 
+            ];
+            GajiModel::create($bonus);
+            PotonganModel::create($terlambat);
+            return redirect()->back();
+        }
     }
 
     /**
@@ -65,7 +97,8 @@ class gaji extends Controller
     }
     public function exportgaji(Request $request){
         $mo = $request->input('mo');
-        return view("pages.gaji.slip",compact("mo"));
+        $idd = $request->input('idd');
+        return view("pages.gaji.slip",compact("mo","idd"));
     }
 
 
@@ -110,7 +143,7 @@ class gaji extends Controller
 
 
         // Display the filtered dates (you can remove this line if not needed for debugging)
-        return view("pages.gaji.gaji", compact("tunjangan","gaji_pokok","item", "absen", "gaji", "sm", "sp","karyawan","salary_menit"));
+        return view("pages.gaji.gaji", compact("idd","mo","tunjangan","gaji_pokok","item", "absen", "gaji", "sm", "sp","karyawan","salary_menit"));
     }
 
 
