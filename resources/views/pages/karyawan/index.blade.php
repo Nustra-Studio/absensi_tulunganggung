@@ -52,7 +52,7 @@
                       $gaji = GajiModel::where('id_pegawai',$item->id)->where('status','gaji_pokok')->first();
                       $makan = GajiModel::where('id_pegawai',$item->id)->where('status','uang_makan')->first();
                       $bensin = GajiModel::where('id_pegawai',$item->id)->where('status','uang_bensin')->first();
-                      $gaji = "Rp " . number_format($gaji->jumlah/ 100000, 2, '.', ',');
+                      $gaji = "Rp " . number_format($gaji->jumlah/ 1000, 2, '.', ',');
                       $makan = "Rp " . number_format($makan->jumlah,0,',','.');
                       $bensin = "Rp " . number_format($bensin->jumlah,0,',','.');
                       $potongan =$potongan->jumlah ."%";
