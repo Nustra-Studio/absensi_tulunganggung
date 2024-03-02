@@ -134,10 +134,8 @@
                                                 ->value('jumlah');
                 $potongan_terlambat =$gaji_pokok * $terlambat * $potongan /100;
                 // gaji pokok
+                $potongan_tidak_masuk = 30 - $jumlah - 4 * $gaji_pokok / 100;
                 $gaji_pokok = $gaji_pokok * 30 / 100;
-                $potongan_tidak_masuk = 30 - $jumlah - 4 * $gaji_pokok ;
-                $debug = ['jumlah'=>$jumlah,"potongan"=>$potongan_tidak_masuk , "gaji"=>$gaji_pokok];
-                dd($debug);
                 // uang bensin 
                 $uang_bensin = GajiModel::where('id_pegawai', $id)
                                 ->where('status', 'uang_bensin') // Mengabaikan baris dengan status 'gaji_pokok'
