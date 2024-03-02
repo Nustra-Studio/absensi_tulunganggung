@@ -60,7 +60,9 @@
                   @endphp
                 <td>{{ $loop->index+1 }}</td>
                 <td> {{$item->nama}}</td>
-                <td> {{$cabang->nama}}</td>
+                <td>@if (!empty($cabang))
+                  {{$cabang->nama}}
+                @endif</td>
                 <td> {{$item->jabatan}}</td>
                 <td>{{$gaji}}</td>
                 <td>{{$makan}}</td>
