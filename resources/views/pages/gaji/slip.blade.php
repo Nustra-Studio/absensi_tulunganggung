@@ -209,7 +209,7 @@
                             <td>Uang Bensin</td>
                             <td>{{"Rp " . number_format($uang_bensin, 0, ',', '.')}}</td>
                             <td>Tidak Masuk</td>
-                            <td>{{"Rp " . number_format($potongan_tidak_masuk+$potongan_tidak_masuk+$potongan_tidak_masuk, 0, ',', '.')}}</td>
+                            <td>{{"Rp " . number_format($potongan_tidak_masuk-$potongan_tidak_masuk-$potongan_tidak_masuk, 0, ',', '.')}}</td>
                         </tr>
                         <tr>
                             <td>Uang Makan</td>
