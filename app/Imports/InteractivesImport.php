@@ -46,7 +46,7 @@ class InteractivesImport implements ToCollection
             if($item[4] != null){
                 if($absen_masuk <= $shift_masuk){
                     if($absen_pulang < $shift_pulang){
-                            $absen->id_pegawai= $item[1];
+                            $absen->id_pegawai= $item[0];
                             $absen->tanggal = $item[3];
                             $absen->absen_masuk = $item[4];
                             $absen->absen_pulang = $item[5];
@@ -57,7 +57,7 @@ class InteractivesImport implements ToCollection
 
                     else{
                         if($absen_pulang > $shift_pulang){
-                            $absen->id_pegawai= $item[1];
+                            $absen->id_pegawai= $item[0];
                             $absen->tanggal = $item[3];
                             $absen->absen_masuk = $item[4];
                             $absen->absen_pulang = $item[5];
@@ -65,7 +65,7 @@ class InteractivesImport implements ToCollection
                             $absen->status ='tepat_waktu';
                         }
                         else{
-                            $absen->id_pegawai= $item[1];
+                            $absen->id_pegawai= $item[0];
                             $absen->tanggal = $item[3];
                             $absen->absen_masuk = $item[4];
                             $absen->absen_pulang = $item[5];
@@ -75,7 +75,7 @@ class InteractivesImport implements ToCollection
                     }
                 }
                 elseif($khusus === "lapangan"){
-                    $absen->id_pegawai= $item[1];
+                    $absen->id_pegawai= $item[0];
                     $absen->tanggal = $item[3];
                     $absen->absen_masuk = $item[4];
                     $absen->absen_pulang = $item[5];
@@ -83,7 +83,7 @@ class InteractivesImport implements ToCollection
                     $absen->save();   
                 }
                 else{
-                    $absen->id_pegawai= $item[1];
+                    $absen->id_pegawai= $item[0];
                     $absen->tanggal = $item[3];
                     $absen->absen_masuk = $item[4];
                     $absen->absen_pulang = $item[5];
