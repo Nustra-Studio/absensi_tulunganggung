@@ -46,7 +46,9 @@
                 <td> {{$item->name}}</td>
                 <td> {{$item->jam_masuk}}</td>
                 <td> {{$item->jam_pulang}}</td>
-                <td>{{$cabang->nama}}</td>
+                <td>@if (!empty($cabang))
+                  {{$cabang->nama}}
+                @endif</td>
                 <td>
                   <div class="text-end">
                     <a href="/database/shift/{{$item->id}}/edit" class="btn btn-primary btn-sm">Edit</a>
