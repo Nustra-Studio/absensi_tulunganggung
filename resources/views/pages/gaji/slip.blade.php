@@ -135,8 +135,8 @@
                 $potongan_terlambat =$gaji_pokok * $terlambat * $potongan /100;
                 // gaji pokok
                 $gaji_pokok = $gaji_pokok * 30 / 100;
-                $potongan_tidak_masuk = 30 - $jumlah - 4 * $gaji_pokok / 100;
-                $debug = ['jumlah'=>$jumlah,"potongan"=>$potongan_tidak_masuk];
+                $potongan_tidak_masuk = 30 - $jumlah - 4 * $gaji_pokok ;
+                $debug = ['jumlah'=>$jumlah,"potongan"=>$potongan_tidak_masuk , "gaji"=>$gaji_pokok];
                 dd($debug);
                 // uang bensin 
                 $uang_bensin = GajiModel::where('id_pegawai', $id)
