@@ -80,7 +80,7 @@
 
                 <tr>
                     <td>{{ $loop->index+1 }}</td>
-                    <td>{{ "Rp " . number_format($gajis ,0, ',', '.') }}</td>
+                    <td>{{ "Rp " . number_format($gajis , 2, '.', ',') }}</td>
                     <td>{{ "Rp " . number_format($potongan, 0, ',', '.') }}</td>
                     <td>{{ "Rp " . number_format($lembur, 0, ',', '.')}} | {{$total_time }} </td>
                     <td>{{ "Rp " . number_format($tunjangan, 0, ',', '.') }}</td>
