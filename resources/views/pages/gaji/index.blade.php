@@ -14,8 +14,7 @@
   <div class="col-md-12 grid-margin stretch-card">
     <div class="card">
         <div class="card-header">
-            <h4 class="card-title">Data Shift</h4>
-            <a href="{{ url('/database/gaji/create') }}" class="btn btn-primary btn-sm">Tambah Data</a>
+            <h4 class="card-title">Data gaji</h4>
         </div>
       <div class="card-body">
         {{-- <p class="text-muted mb-3">Read the <a href="https://datatables.net/" target="_blank"> Official DataTables Documentation </a>for a full list of instructions and other options.</p> --}}
