@@ -134,7 +134,8 @@
                                                 ->value('jumlah');
                 $potongan_terlambat =$gaji_pokok * $terlambat * $potongan /100;
                 // gaji pokok
-                $potongan_tidak_masuk = 30 - $jumlah - 4 * $gaji_pokok / 100;
+                $potongan_tidak_masuk_hari = 30 - $jumlah - 4 ;
+                $potongan_tidak_masuk = $potongan_tidak_masuk_hari * $gaji_pokok / 100;
                 $gaji_pokok = $gaji_pokok * 30 / 100;
                 // uang bensin 
                 $uang_bensin = GajiModel::where('id_pegawai', $id)
@@ -209,7 +210,7 @@
                             <td>Uang Bensin</td>
                             <td>{{"Rp " . number_format($uang_bensin, 0, ',', '.')}}</td>
                             <td>Tidak Masuk</td>
-                            <td>{{"Rp " . number_format(abs($potongan_tidak_masuk), 0, ',', '.')}}</td>
+                            <td>{{"Rp " . number_format(abs($potongan_tidak_masuk), 0, ',', '.')}} / {{ $potongan_tidak_masuk_hari}} Hari</td>
                         </tr>
                         <tr>
                             <td>Uang Makan</td>
