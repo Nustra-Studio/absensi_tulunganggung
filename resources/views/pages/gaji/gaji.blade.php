@@ -75,11 +75,12 @@
                     // $telat = $minutes_difference * $gpm;
                     // $finalValue = $gaji->jumlah - $telat;
                     // $finalValue = ($finalValue == $gaji->jumlah) ? 0 : $finalValue;
+                    $gajis = $gaji->jumlah / 100;
                 @endphp
 
                 <tr>
                     <td>{{ $loop->index+1 }}</td>
-                    <td>{{ "Rp " . number_format($gaji->jumlah, 0, ',', '.') }}</td>
+                    <td>{{ "Rp " . number_format($gajis 0, ',', '.') }}</td>
                     <td>{{ "Rp " . number_format($potongan, 0, ',', '.') }}</td>
                     <td>{{ "Rp " . number_format($lembur, 0, ',', '.')}} | {{$total_time }} </td>
                     <td>{{ "Rp " . number_format($tunjangan, 0, ',', '.') }}</td>

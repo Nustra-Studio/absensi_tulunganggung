@@ -134,7 +134,8 @@
                                                 ->value('jumlah');
                 $potongan_terlambat =$gaji_pokok * $terlambat * $potongan /100;
                 // gaji pokok
-                $gaji_pokok = $gaji_pokok * $jumlah;
+                $gaji_pokok = $gaji_pokok * 30 / 100;
+                $potongan_tidak_masuk = 30 - $jumlah - 4 * $gaji_pokok / 100;
                 // uang bensin 
                 $uang_bensin = GajiModel::where('id_pegawai', $id)
                                 ->where('status', 'uang_bensin') // Mengabaikan baris dengan status 'gaji_pokok'
@@ -170,7 +171,7 @@
                 $date = Carbon::createFromFormat('Y-m', $mo);
                 $date = $date->format('Y-F');
                  // pendapatan
-                    $total = $bonus + $offer_time + $uang_bensin + $uang_makan + $gaji_pokok - $potongan_terlambat -  $potongan_tambahan;
+                    $total = $bonus + $offer_time + $uang_bensin + $uang_makan + $gaji_pokok - $potongan_terlambat -  $potongan_tambahan - $potongan_tidak_masuk;
 
             @endphp
             <div class="slip">
@@ -207,14 +208,14 @@
                         <tr>
                             <td>Uang Bensin</td>
                             <td>{{"Rp " . number_format($uang_bensin, 0, ',', '.')}}</td>
-                            <td>Lain-Lain</td>
-                            <td>{{"Rp " . number_format($potongan_tambahan, 0, ',', '.')}}</td>
+                            <td>Tidak Masuk</td>
+                            <td>{{"Rp " . number_format($potongan_tidak_masuk, 0, ',', '.')}}</td>
                         </tr>
                         <tr>
                             <td>Uang Makan</td>
                             <td>{{"Rp " . number_format($uang_makan, 0, ',', '.')}}</td>
-                            <td></td>
-                            <td></td>
+                            <td>Lain-Lain</td>
+                            <td>{{"Rp " . number_format($potongan_tambahan, 0, ',', '.')}}</td>
                         </tr>
                         <tr>
                             <td>Lembur</td>
