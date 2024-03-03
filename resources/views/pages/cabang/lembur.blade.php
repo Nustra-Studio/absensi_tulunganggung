@@ -10,7 +10,7 @@
     use App\ShiftModel;
     use App\GajiModel;
     use Carbon\Carbon;
-    $absen = AbsenModel::where('keterangan','lembur')->get();
+    $absen = AbsenModel::where('keterangan','lembur')->where("status","tepat_waktu")->get();
 
 @endphp
 @section('content')

@@ -172,7 +172,7 @@
                 $date = Carbon::createFromFormat('Y-m', $mo);
                 $date = $date->format('Y-F');
                  // pendapatan
-                    $total = $bonus + $offer_time + $uang_bensin + $uang_makan + $gaji_pokok - $potongan_terlambat -  $potongan_tambahan - $potongan_tidak_masuk;
+                    $total = $offer_time + $uang_bensin + $uang_makan + $gaji_pokok - $potongan_terlambat -  $potongan_tambahan - $potongan_tidak_masuk;
 
             @endphp
             <div class="slip">
@@ -224,15 +224,19 @@
                             <td></td>
                             <td></td>
                         </tr>
-                        <tr>
+                        {{-- <tr>
                             <td>Bonus</td>
                             <td>{{"Rp " . number_format($bonus, 0, ',', '.')}}</td>
                             <td></td>
                             <td></td>
-                        </tr>
+                        </tr> --}}
                         <tr class="total">
                             <td>Total Pendapatan:</td>
                             <td colspan="3">{{"Rp " . number_format($total, 0, ',', '.')}}</td>
+                        </tr>
+                        <tr class="grand-total">
+                            <td>Bonus</td>
+                            <td colspan="3">{{"Rp " . number_format($bonus, 0, ',', '.')}}</td>
                         </tr>
                         </table>
                 </table>
