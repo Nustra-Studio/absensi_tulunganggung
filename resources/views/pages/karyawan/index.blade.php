@@ -52,10 +52,10 @@
                       $gaji = GajiModel::where('id_pegawai',$item->id)->where('status','gaji_pokok')->first();
                       $makan = GajiModel::where('id_pegawai',$item->id)->where('status','uang_makan')->first();
                       $bensin = GajiModel::where('id_pegawai',$item->id)->where('status','uang_bensin')->first();
-                      $gaji = "Rp " . number_format($gaji->jumlah/ 100, 2, '.', ',');
-                      $makan = "Rp " . number_format($makan->jumlah,0,',','.');
-                      $bensin = "Rp " . number_format($bensin->jumlah,0,',','.');
-                      $potongan =$potongan->jumlah ."%";
+                      if(!empty($gaji)){$gaji = "Rp " . number_format($gaji->jumlah/ 100, 2, '.', ',');}
+                      if(!empty($makan)){$makan = "Rp " . number_format($makan->jumlah,0,',','.');}
+                      if(!empty($bensin)){ $bensin = "Rp " . number_format($bensin->jumlah,0,',','.');}
+                      if(!empty($potongan)){$potongan =$potongan->jumlah ."%";}
                       $shift = ShiftModel::where('id',$item->id_shift)->first();
                   @endphp
                 <td>{{ $loop->index+1 }}</td>

@@ -73,8 +73,13 @@ class gaji extends Controller
                 'status'=>"tambahan",
                 'keterangan'=>$mo 
             ];
-            GajiModel::updateOrCreate(['id_pegawai' => $id], $bonus);
-            PotonganModel::updateOrCreate(['id_pegawai' => $id], $terlambat);
+            GajiModel::where('id_pegawai', $id)
+            ->where('status','bonus')
+            ->updateOrCreate(['id_pegawai' => $id,'status'=>"bonus"], $bonus);
+            PotonganModel::where('id_pegawai', $id)
+            ->where('status','tambahan')
+            ->updateOrCreate(['id_pegawai' => $id,'status'=>"bonus"], $terlambat);
+
             return redirect()->back();
         }
     }
