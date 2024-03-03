@@ -66,7 +66,7 @@ class SolutionsImport implements ToCollection
                             elseif($khusus == "lapangan"){
                                 AbsenModel::where('id', $check_id)->update([
                                     'absen_pulang' => $absen_times,
-                                    'status' => 'lapangan'
+                                    'status' => 'tepat_waktu'
                                 ]);
                             }
                             else{
@@ -92,7 +92,7 @@ class SolutionsImport implements ToCollection
                                 $absen->id_pegawai = $item[0];
                                 $absen->tanggal = $absen_tanggal;
                                 $absen->absen_masuk = $absen_times;
-                                $absen->status = "lapangan";
+                                $absen->status = "tepat_waktu";
                                 $absen->save();
                             }
                             else{
