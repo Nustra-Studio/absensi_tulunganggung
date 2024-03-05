@@ -44,6 +44,7 @@ class LemburController extends Controller
         GajiModel::create($data);
         AbsenModel::where('id',$request->id)->update([
             'keterangan'=>'lembur_approve',
+            'status'=>"tepat_waktu"
         ]);
         return redirect()->route('absen.lembur')->with('success','Data Berhasil Diperbarui');
     }
