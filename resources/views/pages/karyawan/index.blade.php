@@ -70,7 +70,10 @@
                 <td>{{$potongan}}</td>
                   @if(!empty($shift))
                   <td>{{$shift->name}}</td>
+                  @else
+                  <td></td>
                   @endif
+                  
                 <td>
                   <div class="text-end">
                     <a href="/database/karyawan/{{$item->id}}/edit" class="btn btn-primary btn-sm">Edit</a>
