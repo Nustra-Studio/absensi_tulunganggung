@@ -68,7 +68,9 @@
                 <td>{{$makan}}</td>
                 <td>{{$bensin}}</td>
                 <td>{{$potongan}}</td>
-                <td>{{$shift->name}}</td>
+                  @if(!empty($shift))
+                  <td>{{$shift->name}}</td>
+                  @endif
                 <td>
                   <div class="text-end">
                     <a href="/database/karyawan/{{$item->id}}/edit" class="btn btn-primary btn-sm">Edit</a>
